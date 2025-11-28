@@ -146,8 +146,6 @@
     <div class="tonemapped-section">
         <h2 class="tonemapped-title">Unified Tone-Mapped Visualization</h2>
         <div class="tonemapped-content">
-            <p class="tonemapped-intro">To ensure fair visual comparison, we apply the <strong>same tone-mapping operator</strong> (μ-law compression with μ=5000 + gamma 2.2 correction) to both input LDR videos and HDR output videos. This unified processing places all content in the same display-referred color space, providing an accurate representation of the reconstruction quality.</p>
-            
             <div class="method-video-section">
                 <h3 class="method-video-title">Video 1 - Unified Tone-Mapped Inputs and Output</h3>
                 <div class="video-grid">
@@ -173,7 +171,6 @@
                         </video>
                     </div>
                 </div>
-                <p class="method-video-note">Short-exposure: Light denoising (h=5) + unified tone-mapping. Long-exposure: Medium denoising (h=8) + unified tone-mapping.</p>
             </div>
 
             <div class="method-video-section">
@@ -200,27 +197,6 @@
                             Your browser does not support the video tag.
                         </video>
                     </div>
-                </div>
-                <p class="method-video-note">Short-exposure: Light denoising (h=5) + unified tone-mapping. Long-exposure: Medium denoising (h=8) + unified tone-mapping.</p>
-            </div>
-
-            <div class="tonemapped-technical">
-                <h4 class="tonemapped-technical-title">Technical Details</h4>
-                <div class="tonemapped-technical-content">
-                    <p><strong>Pre-processing (applied before tone-mapping):</strong></p>
-                    <ul>
-                        <li>Short-exposure frames: Light denoising using <code>cv2.fastNlMeansDenoisingColored</code> with h=5 (preserves texture detail)</li>
-                        <li>Long-exposure frames: Medium denoising using <code>cv2.fastNlMeansDenoisingColored</code> with h=8 (reduces motion blur artifacts)</li>
-                        <li>No brightness adjustment (maintains original exposure levels)</li>
-                    </ul>
-                    <p><strong>Unified tone-mapping pipeline (consistent across all videos):</strong></p>
-                    <ul>
-                        <li>Convert to linear space: Gamma 2.2 decode</li>
-                        <li>μ-law compression: y = log(1 + μx) / log(1 + μ), with μ=5000</li>
-                        <li>Gamma correction: γ=2.2 encode</li>
-                        <li>Output format: H.264 (yuv420p) for web compatibility</li>
-                    </ul>
-                    <p><strong>Why tone-mapping appears brighter:</strong> The μ-law operator compresses dynamic range by lifting shadow regions significantly (+38% for dark areas), which reduces perceived noise and provides a more natural visualization of HDR content on standard displays.</p>
                 </div>
             </div>
         </div>
